@@ -1,1 +1,0 @@
-{'id': 9223372036854743585, 'username': 'Test', 'firstName': 'string', 'lastName': 'string', 'email': 'string', 'password': 'string', 'phone': 'string', 'userStatus': 0}
