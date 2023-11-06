@@ -5,7 +5,7 @@ import constants
 class User:
 
     def __init__(self):
-        self.username = 'Test'
+        self.username = "MuravevaTest"
         self.user_data = {
             "id": 1,
             "username": self.username,
@@ -17,6 +17,7 @@ class User:
             "userStatus": 0
         }
         self.headers = {
+            "accept": "application/json",
             "Content-Type": "application/json"
         }
 
@@ -30,7 +31,7 @@ class User:
         return r.status_code
 
     def updatе_user(self, upd):
-        r = requests.put(url=f'{constants.BASE_USER_URL}{self.username}', headers=self.headers, json=upd)
+        r = requests.put(url=f'{constants.BASE_USER_URL}/{self.username}', headers=self.headers, json=upd)
         if r.status_code == 200:
             print(constants.USER_UPDATE_SUCCESS_MESSAGE)
             return 200
@@ -38,7 +39,7 @@ class User:
         return r.status_code
 
     def get_user_by_user_name(self):
-        r = requests.get(url=f'{constants.BASE_USER_URL}{self.username}', headers=self.headers)
+        r = requests.get(url=f'{constants.BASE_USER_URL}/{self.username}', headers=self.headers)
         if r.status_code == 200:
             print(r.json())
             return 200
@@ -46,7 +47,7 @@ class User:
         return r.status_code
 
     def delete_user(self):
-        r = requests.delete(url=f'{constants.BASE_USER_URL}{self.username}', headers=self.headers)
+        r = requests.delete(url=f'{constants.BASE_USER_URL}/{self.username}', headers=self.headers)
         if r.status_code == 200:
             print(constants.USER_DELETE_SUCCESS_MESSAGE)
             return 200
