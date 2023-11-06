@@ -24,7 +24,7 @@ class User:
 
         r = requests.post(url=constants.BASE_USER_URL, headers=self.headers, json=self.user_data)
         if r.status_code == 200:
-            print('Пользователь создан')
+            print(constants.USER_CREATE_SUCCESS_MESSAGE)
             return 200
         process_status_code_err(r.status_code)
         return r.status_code
@@ -32,7 +32,7 @@ class User:
     def updatе_user(self, upd):
         r = requests.put(url=f'{constants.BASE_USER_URL}{self.username}', headers=self.headers, json=upd)
         if r.status_code == 200:
-            print('Пользователь обновлен')
+            print(constants.USER_UPDATE_SUCCESS_MESSAGE)
             return 200
         process_status_code_err(r.status_code)
         return r.status_code
@@ -48,17 +48,16 @@ class User:
     def delete_user(self):
         r = requests.delete(url=f'{constants.BASE_USER_URL}{self.username}', headers=self.headers)
         if r.status_code == 200:
-            print('Пользователь удален')
+            print(constants.USER_DELETE_SUCCESS_MESSAGE)
             return 200
         process_status_code_err(r.status_code)
         return r.status_code
 
 
 def process_status_code_err(status_code):
-
     if status_code == 400:
-        raise UserWarning(f'Некорректное имя пользователя, код ответа {status_code}')
+        raise UserWarning(f'{constants.INCORRECT_USER_NAME_FAIL_MESSAGE}{status_code}')
     elif status_code == 404:
-        raise UserWarning(f'Некорректное имя пользователя, код ответа {status_code}')
+        raise UserWarning(f'{constants.INCORRECT_USER_NAME_FAIL_MESSAGE}{status_code}')
     else:
-        raise UserWarning(f'Неизвестная ошибка, код ответа {status_code}')
+        raise UserWarning(f'{constants.UNKNOWN_ERROR_MESSAGE}{status_code}')
